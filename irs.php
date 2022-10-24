@@ -21,10 +21,30 @@ if (isset($_POST['submit'])) {
     <title>IRS</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="nav/nav_mhs/style_nav.css" />
-    <link rel="stylesheet" href="css/upload-file.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <style>
+        .upload-file {
+            height: 167px;
+            display: flex;
+            cursor: pointer;
+            margin-bottom: 30px;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            border-radius: 5px;
+            border: 2px solid #cbd5e1;
+        }
 
+        .upload-file i {
+            font-size: 50px;
+        }
+
+        .upload-file p {
+            margin-top: 15px;
+            font-size: 16px;
+        }
+    </style>
 </head>
 
 <body>
@@ -140,7 +160,7 @@ if (isset($_POST['submit'])) {
         let iconUP = document.getElementById("icon-up");
 
 
-        inIRS.addEventListener("change", ()=>{
+        inIRS.addEventListener("change", () => {
             let inputFile = document.querySelector("input[type=file]").files[0];
 
             uploadedFile.innerText = inputFile.name;
