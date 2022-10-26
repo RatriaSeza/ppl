@@ -1,14 +1,14 @@
 <?php
     require('db/db_login.php');
+
     if (isset($_POST['submit'])) {
-        $nim = test_input($_POST['nim']);
-        $status = test_input($_POST['status']);
-        $nilai = test_input($_POST['nilai']);
-        $lama = test_input($_POST['lama']);
-        $tanggal = test_input($_POST['tanggal']);
-        $scanSkripsi = test_input($_POST['scanSkripsi']);
-        $query = "INSERT INTO skripsi (nim_mhs, status_skripsi, nilai_skripsi, lama_belajar, tanggal_sidang, ba_skripsi) 
-        VALUES ('$nim', '$status', '$nilai', '$lama', '$tanggal', '$scanSkripsi')";
+        $nim = ($_POST['nim']);
+        $status = ($_POST['status']);
+        $nilai = ($_POST['nilai']);
+        $sks = ($_POST['sks']);
+        $tanggal = ($_POST['tanggal']);
+        $scanSkripsi = ($_POST['scanSkripsi']);
+        $query = "INSERT INTO skripsi (nim_mhs, status_skripsi, nilai_skripsi, sks_kumulatif, tanggal_sidang, ba_skripsi) VALUES ('$nim', '$status', '$nilai', '$sks', '$tanggal', '$scanSkripsi')";
         $query_run = mysqli_query($con, $query);
     }
 ?>
@@ -23,8 +23,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="nav/style_nav.css" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://kit.fontawesome.com/15d5872470.js" crossorigin="anonymous"></script>
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" /> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <style>
         .upload-file {
             height: 167px;
@@ -77,7 +76,7 @@
         <div class="content-khs card sky-blue-50 grow" style="padding:50px 70px; margin-top: 10vh; margin-bottom:10vh; margin-right:5vw;">
             <div class="card-header mb-2" style="font-size: 30px ;font-weight: 700;">Data Skripsi</div>
             <div class="card-body">
-                <form method="POST" name="fSkripsi" action="" class="grid" onsubmit="return validateForm()">
+                <form method="POST" name="fSkripsi" action="" class="grid dropzone" onsubmit="return validateForm()">
                     <div class="form-group mt-3 ">
                         <label class="block tracking-wide text-gray-700 text-sm font-bold mb-2" for="grid-city">
                             NIM
@@ -90,11 +89,11 @@
                         </label>
                     </div>
                     <div class="form-group mt-2 ">
-                        <input id="default-radio-1" type="radio" value="sudah" name="status" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <input id="default-radio-1" type="radio" value="Sudah" name="status" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="default-radio-1" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-500">Sudah</label>
                     </div>
                     <div class="form-group mt-2 ">
-                        <input id="default-radio-1" type="radio" value="belum" name="status" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <input id="default-radio-1" type="radio" value="Belum" name="status" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="default-radio-1" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-500">Belum</label>
                     </div>
                     <div class="from-group mt-3">
@@ -104,11 +103,11 @@
                         <div class="relative">
                             <select name="nilai" class="block appearance-none w-full bg-gray-100 border border-gray-200 text-gray-500 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
                                 <option value="">Pilih Nilai</option>
-                                <option value="1">A</option>
-                                <option value="2">B</option>
-                                <option value="3">C</option>
-                                <option value="4">D</option>
-                                <option value="5">E</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
                             </select>
                             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -119,9 +118,9 @@
                     </div>
                     <div class="form-group mt-3 ">
                         <label class="block tracking-wide text-gray-700 text-sm font-bold mb-2" for="grid-city">
-                            Lama Belajar
+                            SKS Kumulatif
                         </label>
-                        <input name="lama" class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="text" placeholder="">
+                        <input name="sks" class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="number" placeholder="">
                     </div>
                     <div class="form-group mt-3 ">
                         <label class="block tracking-wide text-gray-700 text-sm font-bold mb-2" for="grid-city">
@@ -144,7 +143,7 @@
                         <p class="self-center text-slate-100"><strong><i class="fas fa-info-circle"></i> Mohon untuk mengisi semua data!</strong></p>
                     </div>
                     <div class="justify-self-end">
-                        <button class="bg-violet-500 hover:bg-violet-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" type="submit">Save</button>
+                        <button class="bg-violet-500 hover:bg-violet-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" type="submit" name="submit">Save</button>
                     </div>
                 </form>
             </div>
@@ -158,10 +157,10 @@
             var nim = document.forms["fSkripsi"]["nim"].value;
             var status = document.forms["fSkripsi"]["status"].value;
             var nilai = document.forms["fSkripsi"]["nilai"].value;
-            var lama = document.forms["fSkripsi"]["lama"].value;
+            var sks = document.forms["fSkripsi"]["sks"].value;
             var tanggal = document.forms["fSkripsi"]["tanggal"].value;
             var skripsi = document.getElementById("inSkripsi");
-            if (nim == "" || status == '' || nilai == '' || lama == '' || tanggal == '' || skripsi.files.length === 0) {
+            if (nim == "" || status == '' || nilai == '' || sks == '' || tanggal == '' || skripsi.files.length === 0) {
                 document.getElementById('ferror').style.display = "flex";
                 return false;
             }
