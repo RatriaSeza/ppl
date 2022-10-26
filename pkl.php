@@ -1,12 +1,11 @@
 <?php
     require('db/db_login.php');
     if (isset($_POST['submit'])) {
-        $nim = test_input($_POST['nim']);
-        $status = test_input($_POST['status']);
-        $nilai = test_input($_POST['nilai']);
-        $scanPKL = test_input($_POST['scanPKL']);
-        $query = "INSERT INTO pkl (nim_mhs, status_pkl, nilai_pkl, ba_pkl) 
-        VALUES ('$nim', '$status', '$judul', '$scanPKL')";
+        $nim = ($_POST['nim']);
+        $status = ($_POST['status']);
+        $nilai = ($_POST['nilai']);
+        $scanPKL = ($_POST['scanPKL']);
+        $query = "INSERT INTO pkl (nim_mhs, status_pkl, nilai_pkl, ba_pkl) VALUES ('$nim', '$status', '$nilai', '$scanPKL')";
         $query_run = mysqli_query($con, $query);
     }
 ?>
@@ -75,7 +74,7 @@
         <div class="content-khs card sky-blue-50 grow" style="padding:50px 70px; margin-top: 10vh; margin-bottom:10vh; margin-right:5vw;">
             <div class="card-header mb-2" style="font-size: 30px ;font-weight: 700;">Data PKL</div>
             <div class="card-body">
-                <form method="POST" name="fPKL" action="" class="grid" onsubmit="return validateForm()">
+                <form method="POST" name="fPKL" action="" class="grid dropzone" onsubmit="return validateForm()">
                     <div class="form-group mt-3 ">
                         <label class="block tracking-wide text-gray-700 text-sm font-bold mb-2" for="grid-city">
                             NIM
@@ -88,11 +87,11 @@
                         </label>
                     </div>
                     <div class="form-group mt-2 ">
-                        <input id="default-radio-1" type="radio" value="sudah" name="status" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <input id="default-radio-1" type="radio" value="Sudah" name="status" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="default-radio-1" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-500">Sudah</label>
                     </div>
                     <div class="form-group mt-2 ">
-                        <input id="default-radio-1" type="radio" value="belum" name="status" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <input id="default-radio-1" type="radio" value="Belum" name="status" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="default-radio-1" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-500">Belum</label>
                     </div>
                     <div class="from-group mt-3">
@@ -102,11 +101,11 @@
                         <div class="relative">
                             <select name="nilai" class="block appearance-none w-full bg-gray-100 border border-gray-200 text-gray-500 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
                                 <option value="">Pilih Nilai</option>
-                                <option value="1">A</option>
-                                <option value="2">B</option>
-                                <option value="3">C</option>
-                                <option value="4">D</option>
-                                <option value="5">E</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
                             </select>
                             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -130,7 +129,7 @@
                         <p class="self-center text-slate-100"><strong><i class="fas fa-info-circle"></i> Mohon untuk mengisi semua data!</strong></p>
                     </div>
                     <div class="justify-self-end">
-                        <button class="bg-violet-500 hover:bg-violet-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" type="submit">Save</button>
+                        <button class="bg-violet-500 hover:bg-violet-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" type="submit" name="submit">Save</button>
                     </div>
                 </form>
             </div>
@@ -143,7 +142,7 @@
         function validateForm() {
             var nim = document.forms["fPKL"]["nim"].value;
             var status = document.forms["fPKL"]["status"].value;
-            var judul = document.forms["fPKL"]["nilai"].value;
+            var nilai = document.forms["fPKL"]["nilai"].value;
             var pkl = document.getElementById("inPKL");
             if (nim == "" || status == '' || nilai == '' || pkl.files.length === 0) {
                 document.getElementById('ferror').style.display = "flex";
