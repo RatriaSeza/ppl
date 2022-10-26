@@ -27,7 +27,6 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" href="nav/nav_mhs/style_nav.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/15d5872470.js" crossorigin="anonymous"></script>
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" /> -->
     <style>
         .upload-file {
             height: 167px;
@@ -57,9 +56,10 @@ if (isset($_POST['submit'])) {
     <div class="container flex">
         <div class="left sticky top-0">
             <div class="user flex card">
-                <img class="shrink" id="avatar" src="img/olix.png" alt="" />
+                <img class="object-contain hover:scale-125 " id="avatar" src="img/olix.png" alt="" />
                 <div class="flex-row ml-5">
-                    <p class="username">Olivia Rodrigo
+                    <p class="username">
+                        Olivia Rodrigo <br>
                         <span style="font-size: 12px;">24060120130052</span>
                     </p>
                     <p class="status">
@@ -78,7 +78,7 @@ if (isset($_POST['submit'])) {
                 </ul>
             </div>
         </div>
-        <div class="content-khs card sky-blue-50 grow" style="padding:50px 70px; margin-top: 10vh; margin-bottom:10vh; margin-right:5vw;">
+        <div class="content-khs card sky-blue-50 grow" style="padding:50px 70px; margin-top: 10vh; margin-bottom:10vh;">
             <div class="card-header mb-2" style="font-size: 30px ;font-weight: 700;">Data KHS</div>
             <div class="card-body">
                 <form method="POST" name="fKHS" action="" class="grid" onsubmit="return validateForm()">
@@ -112,25 +112,25 @@ if (isset($_POST['submit'])) {
                         </div>
                     </div>
                     <div class="form-group mb-7">
-                        <label class="block tracking-wide text-gray-700 text-sm font-bold mb-2" for="grid-city">
+                        <label class="block tracking-wide text-gray-700 text-sm font-bold mb-2" for="SKSSem">
                             SKS Semester
                         </label>
                         <input name="SKSSem" class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="number" placeholder="">
                     </div>
                     <div class="form-group mb-7">
-                        <label class="block tracking-wide text-gray-700 text-sm font-bold mb-2" for="grid-city">
+                        <label class="block tracking-wide text-gray-700 text-sm font-bold mb-2" for="SKSKum">
                             SKS Kumulatif
                         </label>
                         <input name="SKSKum" class="appearance-none block w-full bg-gray-200 text-gray-800 border border-gray-300 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="number" placeholder="" disabled>
                     </div>
                     <div class="form-group mb-7">
-                        <label class="block tracking-wide text-gray-700 text-sm font-bold mb-2" for="grid-city">
+                        <label class="block tracking-wide text-gray-700 text-sm font-bold mb-2" for="IPS">
                             IP Semester
                         </label>
                         <input name="IPS" class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="number" placeholder="">
                     </div>
                     <div class="form-group mb-7">
-                        <label class="block tracking-wide text-gray-700 text-sm font-bold mb-2" for="grid-city">
+                        <label class="block tracking-wide text-gray-700 text-sm font-bold mb-2" for="IPK">
                             IP Kumulatif
                         </label>
                         <input name="IPK" class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-city" type="number" placeholder="">
