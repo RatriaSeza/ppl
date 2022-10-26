@@ -14,14 +14,17 @@
      }
 ?>
 
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Edit Profil</title>
-
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="nav/style_nav.css" />
-        <link rel="stylesheet" type="text/css" href="fontawesome/css/all.min.css">
         <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://kit.fontawesome.com/15d5872470.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <div class="container flex">
@@ -41,24 +44,20 @@
                     <div class="flex-row mr-5">
                         <img id="avatar" <?php echo $fetch['image']; ?> />
                     </div>
-                    <div class="flex-row  mt-1 pr-5">
+                    <div class="flex-row mt-1 pr-5">
                         <p class="nama"> <b><?php echo $fetch['nama']; ?></b> </p>  <a id="update_profil" href="update_profile.php"><i class="fa-solid fa-pen-to-square"></i></a>
                         <p class="status">Mahasiswa Departemen Informatika Fakultas Sains dan Matematika</p>
                     </div>
                 </div>
                 <div class="sidenav card">
-                    <ul class="grid gap-2">
-                        <li><a id="Profil" href="edit_profil.php"><img src="nav/icon/Profil.png" alt="" /> Profil</a></li>
-                        <hr>
-                        <li><a id="IRS" href="#"><img src="nav/icon/IRS.png" alt="" /> Data IRS</a></li>
-                        <hr>
-                        <li><a id="KHS" href="#"><img src="nav/icon/KHS.png" alt="" /> Data KHS</a></li>
-                        <hr>
-                        <li><a id="PKL" href="#"><img src="nav/icon/PKL.png" alt="" /> Data PKL</a></li>
-                        <hr>
-                        <li><a id="Skripsi" href="#"><img src="nav/icon/Skripsi.png" alt="" /> Data Skripsi</a></li>
-                        <hr>
-                        <li><a id="Logout" href="logout.php"><img src="nav/icon/Logout.png" alt="" /> Keluar</a></li>
+                    <ul id="navlist" class="divide-y divide-gray-500 grid">
+                        <li><a id="Dashboard" href="DashboardMahasiswa.php"><i class="fas fa-house"></i> Dashboard</a></li>
+                        <li><a id="Profil" href=""><i class="fas fa-user"></i> Profil</a></li>
+                        <li><a id="IRS" href="irs.php"><i class="fas fa-file-lines"></i> Data IRS</a></li>
+                        <li><a id="KHS" href="#"><i class="fas fa-file-lines"></i> Data KHS</a></li>
+                        <li><a id="PKL" href="#"><i class="fas fa-building"></i> Data PKL</a></li>
+                        <li><a id="Skripsi" href="#"><i class="fas fa-book-bookmark"></i> Data Skripsi</a></li>
+                        <li><a id="Logout" href="logout.php"><i class="fas fa-right-from-bracket"></i> Keluar</a></li>
                     </ul>
                 </div>
             </div>
