@@ -18,7 +18,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
 </head>
 
-<body class="bg-purple-100">
+<body class="">
 
 <?php
     $servername = "localhost";
