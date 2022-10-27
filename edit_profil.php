@@ -1,17 +1,5 @@
 <?php
     include('db/db_login.php');
-    session_start();
-    $email = $_SESSION['email'];
-
-    if (!isset($_SESSION['email'])) {
-        header('Location: login.php');
-    }
-
-    if(isset($_GET['logout'])){
-        unset($email);
-        session_destroy();
-        header('location:login.php');
-     }
 ?>
 
 <!DOCTYPE html>
@@ -30,23 +18,15 @@
         <div class="container flex">
             <div class="left sticky top-0">
                 <div class="user flex card">
-                    <?php
-                        $select = mysqli_query($con, "SELECT * FROM user WHERE email = '$email'") or die('query failed');
-                        if(mysqli_num_rows($select) > 0){
-                            $fetch = mysqli_fetch_assoc($select);
-                        }
-                        if($fetch['image'] == ''){
-                            echo '<img src="img/default-avatar.png">';
-                        }else{
-                            echo '<img src="uploaded_image/'.$fetch['image'].'">';
-                        }
-                    ?>
-                    <div class="flex-row mr-5">
-                        <img id="avatar" <?php echo $fetch['image']; ?> />
-                    </div>
-                    <div class="flex-row mt-1 pr-5">
-                        <p class="nama"> <b><?php echo $fetch['nama']; ?></b> </p>  <a id="update_profil" href="update_profile.php"><i class="fa-solid fa-pen-to-square"></i></a>
-                        <p class="status">Mahasiswa Departemen Informatika Fakultas Sains dan Matematika</p>
+                    <img class="object-contain hover:scale-125 " id="avatar" src="img/olix.png" alt="" />
+                    <div class="flex-row ml-5">
+                        <p class="username">
+                            Olivia Rodrigo <br>
+                            <span style="font-size: 12px;">24060120130052</span>
+                        </p>
+                        <p class="status">
+                            Mahasiswa Aktif Departemen Informatika Fakultas Sains dan Matematika
+                        </p>
                     </div>
                 </div>
                 <div class="sidenav card">
@@ -61,24 +41,24 @@
                     </ul>
                 </div>
             </div>
-            <div class="content-irs card sky-blue-50 grow" style="padding:50px 70px;margin-left:10vh; margin-top: 10vh; margin-bottom:10vh; margin-right:5vw;">
+            <div class="content-edit-profil card sky-blue-50 grow" style="padding:50px 70px; margin-top: 10vh; margin-bottom:10vh;">
                 <div class="card-header mb-2" style="font-size: 30px ;font-weight: 700;">Edit Profil</div>
                     <div class="card-body">
                         <?php
                         if (isset($_POST['submit'])) {
-                            $nama = test_input($_POST['nama']);
-                            $nim = test_input($_POST['nim']);
-                            $angkatan = test_input($_POST['angkatan']);
-                            $status_kuliah = test_input($_POST['status_kuliah']);
-                            $jalur_masuk = test_input($_POST['jalur_masuk']);
-                            $jenis_kelamin = test_input($_POST['jenis_kelamin']);
-                            $alamat = test_input($_POST['alamat']);
-                            $provinsi = test_input($_POST['provinsi']);
-                            $kabupaten = test_input($_POST['kabupaten']);
-                            $email = test_input($_POST['email']);
-                            $nohp = test_input($_POST['nohp']);
+                            $nama = $_POST['nama'];
+                            $nim = $_POST['nim'];
+                            $angkatan = $_POST['angkatan'];
+                            $status_kuliah = $_POST['status_kuliah'];
+                            $jalur_masuk = $_POST['jalur_masuk'];
+                            $jenis_kelamin = $_POST['jenis_kelamin'];
+                            $alamat = $_POST['alamat'];
+                            $provinsi = $_POST['provinsi'];
+                            $kabupaten = $_POST['kabupaten'];
+                            $email = $_POST['email'];
+                            $nohp = $_POST['nohp'];
 
-                            $result = $con->query("INSERT INTO mahasiswa(nama, nim, angkatan, status_kuliah, jalur_masuk, jenis_kelamin, alamat, id_provinsi, id_kabupaten, email, nohp) 
+                            $query ("INSERT INTO mahasiswa (nama, nim, angkatan, status_kuliah, jalur_masuk, jenis_kelamin, alamat, id_provinsi, id_kabupaten, email, nohp) 
                             VALUES('$nama', '$nim', '$angkatan', '$status_kuliah', '$jalur_masuk', '$jenis_kelamin', '$alamat', '$provinsi', '$kabupaten', '$email', '$nohp')");
 
                             if ($result):
@@ -91,19 +71,19 @@
                             endif;
                         }
                         ?>
-                    <form method="POST" onsubmit="return submitForm()" name="form" class="grid gap-7">
+                    <form method="POST" onsubmit="return submitForm()" name="form" class="grid">
 
-                        <div class="form-group">
+                        <div class="form-group mb-7">
                             <label class="block tracking-wide text-gray-700 text-sm font-bold mb-2" for="nama">Nama Lengkap</label>
-                            <input name="nama" id="nama" type="text" class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="<?php echo $fetch['nama']; ?>" readonly>
+                            <input name="nama" id="nama" type="text" class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Masukkan Nama Lengkap" required>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group mb-7">
                             <label class="block tracking-wide text-gray-700 text-sm font-bold mb-2" for="nim">NIM</label>
                             <input name="nim" id="nim" type="text" class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Masukkan NIM" required>
                         </div>
 
-                        <div class="from-group">
+                        <div class="form-group mb-7">
                             <label class="block tracking-wide text-sm font-bold mb-2" for="angkatan">Angkatan</label>
                             <div class="relative">
                                 <select name="angkatan" id="angkatan" class="block appearance-none w-full bg-gray-100 border border-gray-200 text-gray-500 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" required>
@@ -124,7 +104,7 @@
                             </div>
                         </div>
 
-                        <div class="from-group">
+                        <div class="form-group mb-7">
                             <label class="block tracking-wide text-sm font-bold mb-2" for="status_kuliah">Status</label>
                             <div class="relative">
                                 <select name="status_kuliah" id="status_kuliah" class="block appearance-none w-full bg-gray-100 border border-gray-200 text-gray-500 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" required>
@@ -142,7 +122,7 @@
                             </div>
                         </div>
 
-                        <div class="from-group">
+                        <div class="form-group mb-7">
                             <label class="block tracking-wide text-sm font-bold mb-2" for="jalur_masuk">Jalur Masuk</label>
                             <div class="relative">
                                 <select name="jalur_masuk" id="jalur_masuk" class="block appearance-none w-full bg-gray-100 border border-gray-200 text-gray-500 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" required>
@@ -160,7 +140,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group mb-7">
                             <label class="block tracking-wide text-gray-700 text-sm font-bold mb-2" for="jenis_kelamin">Jenis Kelamin</label>
                                 <div class="form-check mt-2">
                                     <input type="radio" name="jenis_kelamin" id="jenis_kelamin1" value="Laki-laki" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" required>
@@ -172,12 +152,12 @@
                                 </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group mb-7">
                             <label class="block tracking-wide text-gray-700 text-sm font-bold mb-2" for="alamat">Alamat</label>
                             <input name="alamat" id="alamat" type="text-area" class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Masukkan Alamat" required>
                         </div>
 
-                        <div class="from-group">
+                        <div class="form-group mb-7">
                             <label class="block tracking-wide text-sm font-bold mb-2" for="provinsi">Provinsi</label>
                             <div class="relative">
                                 <select name="provinsi" id="provinsi" class="form-control block appearance-none w-full bg-gray-100 border border-gray-200 text-gray-500 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" required>
@@ -198,7 +178,7 @@
                             </div>
                         </div>
 
-                        <div class="from-group">
+                        <div class="form-group mb-7">
                             <label class="block tracking-wide text-sm font-bold mb-2" for="kabupaten">Kabupaten/Kota</label>
                             <div class="relative">
                                 <select name="kabupaten" id="kabupaten" class="form-control block appearance-none w-full bg-gray-100 border border-gray-200 text-gray-500 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" required>
@@ -212,12 +192,12 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group mb-7">
                             <label class="block tracking-wide text-gray-700 text-sm font-bold mb-2" for="email">Email</label>
-                            <input name="email" id="email" type="email" class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="<?php echo $fetch['email']; ?>" readonly>
+                            <input name="email" id="email" type="email" class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Masukkan Email" required>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group mb-7">
                             <label class="block tracking-wide text-gray-700 text-sm font-bold mb-2" for="nohp">No Handphone</label>
                             <input name="nohp" id="nohp" type="text" class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Masukkan No Handphone" required>
                         </div>
@@ -230,6 +210,10 @@
             </div>
         </div>
         <script src="script.js"></script>
+        <script>
+            document.getElementById('Profil').style.opacity = '2';
+            document.getElementById('Profil').style.color = '#4ade80';
+        </script>
+        
     </body>
 </html>
-
