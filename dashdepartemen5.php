@@ -66,7 +66,7 @@
 ?>
 
 <div class="grid grid-cols-3 gap-1">
-    <div class="row-span-3 bg-purple-100">
+    <div class="row-span-3 ">
         <div class="left">
             <div class="user flex card">
                 <img id="avatar" src="img/olix.png" alt="" />
